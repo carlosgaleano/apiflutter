@@ -2,12 +2,13 @@
  * @Author: Carlos Galeano
  * @Date:   2025-03-25 16:31:45
  * @Last Modified by:   Carlos Galeano
- * @Last Modified time: 2025-03-25 16:32:04
+ * @Last Modified time: 2025-03-25 18:19:16
  */
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'menu_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -41,7 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           token = data['access_token'];
         });
-        startCounter();
+        // Redirigimos a MenuScreen después de un login exitoso
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MenuScreen()), // Llamamos a MenuScreen
+        );
       } else {
         showError('Login failed. Check your credentials.');
       }
